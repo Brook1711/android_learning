@@ -8,16 +8,15 @@
 
     <TextView
         android:id="@+id/show"
-        android:layout_width="380dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="135dp"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="17dp"
         android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout2" />
 
     <Button
         android:id="@+id/button"
@@ -28,7 +27,6 @@
         android:text="@string/but_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -36,30 +34,77 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="181dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="237dp"
-        app:layout_constraintBottom_toTopOf="@+id/show"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/text_ready_to_morse_encode">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_ready_to_morse_encode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="支持键盘常用符号，英文字母大写" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button_media"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="10dp"
-        android:text="voice"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="6dp"
         android:onClick="clickHandler_voice"
+        android:text="voice"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="6dp"
+        android:onClick="clickHandler_decode"
+        android:text="decode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/decode_result"
+        android:layout_width="0dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="20dp"
+        android:text="译码结果"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/text_ready_to_morse_encode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="195dp"
+        android:hint="支持键盘常用符号，英文字母大写"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/frequence"
+        android:layout_width="89dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="64dp"
+        android:text="frequence"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/decode_result" />
+
+    <TextView
+        android:id="@+id/stop_time"
+        android:layout_width="192dp"
+        android:layout_height="41dp"
+        android:text="stoptime"
+        app:layout_constraintBottom_toTopOf="@+id/text_ready_to_morse_encode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
