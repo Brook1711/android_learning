@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                     if (High_duration_t_ms >50){//被认可的摩斯码符号脉冲
                         this.last_low_sys_time = current_sys_time//更新
                         this.last_state = 0
-                        if (High_duration_t_ms > 200){//判断符号类型
+                        if (High_duration_t_ms > 250){//判断符号类型
                             temp_decode_morse = temp_decode_morse.plus('-')
                         }
                         else{
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
                 '.' -> {
                     mPlayer_dit.start()
                     Thread.currentThread()
-                    Thread.sleep(400)
+                    Thread.sleep(500)
                 }
                 '-' -> {
                     mPlayer_line.start()
@@ -190,6 +190,44 @@ class MainActivity : AppCompatActivity() {
 
     fun clickHandler_decode(view: View) {
 //val dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(2048, 1024, 0)
-        pitch_detection_isRunning = pitch_detection_isRunning == false
+        var result_text = findViewById<TextView>(R.id.decode_result).text.toString()
+        var tv_decode_text = findViewById<TextView>(R.id.decode_text)
+        tv_decode_text.text = from_morse_to_text(result_text)
+    }
+    fun from_morse_to_text(result_text:String):String{
+        val morse_decode_table:Map<String,Char> = mapOf(".-/" to 'A',"-.../" to 'B' ,"-.-./" to 'C',"-../" to 'D',
+            "./" to 'E',"..-./" to 'F', "--./" to 'G',"..../" to 'H',"../" to 'I', ".---/" to 'J',"-.-/" to 'K',
+            ".-../" to 'L', "--/" to 'M', "-./" to 'N', "---/" to 'O',".--./" to 'P' ,  "--.-/" to 'Q',".-./" to 'R',
+            ".../" to 'S', "-/" to 'T', "..-/" to 'U', "...-/" to 'V', ".--/" to 'W', "-..-/" to 'X',"-.--/" to 'Y' , "--../" to  'Z',
+            "-----/" to '0', ".----/" to '1',"..---/" to '2', "...--/" to '3', "....-/" to '4', "...../" to '5',
+            "-..../" to '6', "--.../" to '7', "---../" to '8',"----./" to '9' ,
+            "..--../" to '?',"-..-./" to  '/', "-.--./" to '(', "-.--.-/" to ')', "-....-/" to '-',
+            ".-.-.-/" to '.', "..-../" to ',' , "..--./" to '!', "---.../" to ':', "-.-.-/" to ';',
+            ".-.-./" to '+', "-...-/" to '=')
+        var finnal_result = ""
+        var temp_str = ""
+        var index = 0
+        for(char in result_text){
+            if(char == '/'){
+                if(temp_str != ""){
+                    temp_str = temp_str.plus('/')
+                    finnal_result = finnal_result.plus(morse_decode_table[temp_str])
+                }
+                temp_str = ""
+            }
+            else if(index == result_text.length - 1){
+                temp_str = temp_str.plus(char)
+                temp_str = temp_str.plus('/')
+                if(temp_str != ""){
+                    println(temp_str)
+                    finnal_result = finnal_result.plus(morse_decode_table[temp_str])
+                }
+            }
+            else{
+                temp_str = temp_str.plus(char)
+            }
+            index = index + 1
+        }
+        return finnal_result
     }
 }
