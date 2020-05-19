@@ -82,13 +82,13 @@ class MainActivity : AppCompatActivity() {
             if (pitchInHz < 1100 && pitchInHz > 900){//当前低电平是line或dit（高电平）
                 if(last_state == 0){//这是一个上升沿
                     var Low_duratinog_t_ms = current_sys_time - last_low_sys_time
-                    if (Low_duratinog_t_ms > 1000){//被认可的摩斯码符号间隔
+                    if (Low_duratinog_t_ms > 300){//被认可的摩斯码符号间隔
                         this.last_high_sys_time = current_sys_time//更新系统状态
                         this.last_state = 1
                         temp_decode_morse = temp_decode_morse.plus('/')//更新摩斯码
                         println(temp_decode_morse)
                     }
-                    else if (Low_duratinog_t_ms > 50)//码字间隔
+                    else if (Low_duratinog_t_ms > 10)//码字间隔
                     {
                         this.last_state = 1
                         this.last_high_sys_time = current_sys_time
@@ -103,10 +103,10 @@ class MainActivity : AppCompatActivity() {
             else{//当前电平是低电平
                 if (this.last_state == 1){//这是一个下降沿
                     var High_duration_t_ms = current_sys_time -last_high_sys_time
-                    if (High_duration_t_ms >50){//被认可的摩斯码符号脉冲
+                    if (High_duration_t_ms >10){//被认可的摩斯码符号脉冲
                         this.last_low_sys_time = current_sys_time//更新
                         this.last_state = 0
-                        if (High_duration_t_ms > 250){//判断符号类型
+                        if (High_duration_t_ms > 220){//判断符号类型
                             temp_decode_morse = temp_decode_morse.plus('-')
                         }
                         else{
@@ -171,16 +171,16 @@ class MainActivity : AppCompatActivity() {
                 '.' -> {
                     mPlayer_dit.start()
                     Thread.currentThread()
-                    Thread.sleep(500)
+                    Thread.sleep(300)
                 }
                 '-' -> {
                     mPlayer_line.start()
                     Thread.currentThread()
-                    Thread.sleep(500)
+                    Thread.sleep(490)
                 }
                 '/' -> {
                     Thread.currentThread()
-                    Thread.sleep(1000)
+                    Thread.sleep(450)
                 }
             }
         }
