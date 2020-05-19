@@ -1,4 +1,5 @@
 # android_learning
+老哥交个朋友，给个fork star follow三连，PS：码农不易请对他们温柔一点
 ## 开箱即用
 主目录下app-debug.apk是项目成品，可以直接安装（只支持安卓9以上的手机固件）
 ## 视频演示：
